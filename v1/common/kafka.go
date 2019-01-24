@@ -52,7 +52,7 @@ func (p *Publisher) Publish(ctx context.Context, key string, m proto.Message) er
 func (p *Publisher) PublishRaw(_ context.Context, key string, m []byte) error {
 	msg := &sarama.ProducerMessage{
 		Topic: p.topic,
-		Key:   sarama.StringEncoder(key),
+		//Key:   sarama.StringEncoder(key),
 		Value: sarama.ByteEncoder(m),
 	}
 	_, _, err := p.producer.SendMessage(msg)
