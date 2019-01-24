@@ -1,16 +1,16 @@
 ---
-broker: 'amqp://guest:guest@localhost:5672/'
-#broker: 'redis://localhost:6379'
+#broker: 'amqp://guest:guest@localhost:5672/'
+broker: 'kafka://192.168.2.224:9092'
 #broker: 'https://sqs.us-west-2.amazonaws.com/123456789012'
 default_queue: machinery_tasks
 
-result_backend: 'redis://localhost:6379'
+result_backend: 'redis://192.168.2.163:6379'
 #result_backend: 'memcache://localhost:11211'
 #result_backend: 'mongodb://localhost:27017'
 results_expire_in: 3600000
 
-amqp:
-  binding_key: machinery_task
-  exchange: machinery_exchange
-  exchange_type: direct
-  prefetch_count: 3
+kafka:
+  broker_hosts_string: '192.168.2.224:9092'
+  topic: machinery_exchange
+  max_retry: 3
+  kafka_group_id: 'worker_1' 

@@ -4,10 +4,10 @@ import (
 	"errors"
 
 	"github.com/RichardKnop/machinery/v1/brokers/iface"
-	"github.com/RichardKnop/machinery/v1/config"
 	"github.com/RichardKnop/machinery/v1/log"
 	"github.com/RichardKnop/machinery/v1/retry"
 	"github.com/RichardKnop/machinery/v1/tasks"
+	"github.com/panzhenyu12/machinery/v1/config"
 )
 
 // Broker represents a base broker structure

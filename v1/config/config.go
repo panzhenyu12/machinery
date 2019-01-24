@@ -57,6 +57,7 @@ type Config struct {
 	AMQP            *AMQPConfig      `yaml:"amqp"`
 	SQS             *SQSConfig       `yaml:"sqs"`
 	Redis           *RedisConfig     `yaml:"redis"`
+	Kafka           *KafkaConfig     `yaml:"kafka"`
 	GCPPubSub       *GCPPubSubConfig `yaml:"-" ignored:"true"`
 	TLSConfig       *tls.Config
 	// NoUnixSignals - when set disables signal handling in machinery
@@ -121,6 +122,15 @@ type RedisConfig struct {
 
 	// DelayedTasksPollPeriod specifies the period in milliseconds when polling redis for delayed tasks
 	DelayedTasksPollPeriod int `yaml:"delayed_tasks_poll_period" envconfig:"REDIS_DELAYED_TASKS_POLL_PERIOD"`
+}
+type KafkaConfig struct {
+	BrokerHosts       []string
+	BrokerHostsString string `yaml:"broker_hosts_string" envconfig:"KAFKA_BROKER_HOSTS"`
+	Partition         int32  `yaml:"partition" envconfig:"KAFKA_PARTITION"`
+	Topic             string `yaml:"topic" envconfig:"KAFKA_TOPIC"`
+	MaxRetry          int    `yaml:"max_retry" envconfig:"KAFKA_MAX_RETRY"`
+	KafkaGroupID      string `yaml:"kafka_group_id" envconfig:"KAFKA_MAX_RETRY"`
+	//Config *sarama.Config
 }
 
 // GCPPubSubConfig wraps GCP PubSub related configuration

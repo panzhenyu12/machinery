@@ -24,6 +24,7 @@ import (
 	memcachebackend "github.com/RichardKnop/machinery/v1/backends/memcache"
 	mongobackend "github.com/RichardKnop/machinery/v1/backends/mongo"
 	redisbackend "github.com/RichardKnop/machinery/v1/backends/redis"
+	kafkabroker "github.com/panzhenyu12/machinery/v1/brokers/kafka"
 )
 
 // BrokerFactory creates a new object of iface.Broker
@@ -36,7 +37,10 @@ func BrokerFactory(cnf *config.Config) (brokeriface.Broker, error) {
 	if strings.HasPrefix(cnf.Broker, "amqps://") {
 		return amqpbroker.New(cnf), nil
 	}
-
+	//kafkabroker
+	if strings.HasPrefix(cnf.Broker, "kafka://") {
+		return kafkabroker.New(cnf), nil
+	}
 	if strings.HasPrefix(cnf.Broker, "redis://") {
 		parts := strings.Split(cnf.Broker, "redis://")
 		if len(parts) != 2 {
